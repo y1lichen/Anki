@@ -5,57 +5,78 @@
 //  Created by 陳奕利 on 2022/2/16.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var errorHandling: ErrorHandling
+
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.front, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
 
+    @State private var searchingText = ""
+    @State private var showAddItemView = false
+
+    @State private var navigationTitle = "Anki"
+	
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+						EditItemView(item: item, updateItem: updateItem)
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        VStack {
+                            Text(item.front!)
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            Text("\(item.back!)")
+                                .offset(x: 10, y: 2)
+                                .font(.body)
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
             }
+            .searchable(text: $searchingText)
+            .navigationTitle(navigationTitle)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(destination:
+									PlayingView()) {
+                        Image(systemName: "play.fill")
+					}
+				}
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
+                    Button(action: openAddItemView) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
-            }
-            Text("Select an item")
+			}
+			.onAppear(perform: {
+                navigationTitle = "Anki"
+            })
+            .onDisappear(perform: {
+                navigationTitle = "Menu"
+            })
+        }
+        .sheet(isPresented: $showAddItemView) {
+            AddItemView().withErrorAlert()
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+    private func updateItem() {
+    }
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    private func openAddItemView() {
+        showAddItemView = true
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -65,24 +86,8 @@ struct ContentView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                self.errorHandling.handleError(error: error)
             }
         }
-    }
-}
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

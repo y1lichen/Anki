@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C846C27BDE63D0058F103 /* PlayingView.swift */; };
 		D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F0F27BD54E900F77379 /* AnkiApp.swift */; };
 		D42A9F1227BD54E900F77379 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1127BD54E900F77379 /* ContentView.swift */; };
 		D42A9F1427BD54EA00F77379 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D42A9F1327BD54EA00F77379 /* Assets.xcassets */; };
 		D42A9F1727BD54EA00F77379 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D42A9F1627BD54EA00F77379 /* Preview Assets.xcassets */; };
 		D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1827BD54EA00F77379 /* Persistence.swift */; };
 		D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1A27BD54EA00F77379 /* Anki.xcdatamodeld */; };
+		D42A9F2327BD55CF00F77379 /* ErrorAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */; };
+		D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4A07D27BD62C0005E4E97 /* EditItemView.swift */; };
+		D4E080A127BD592D00A27F34 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E080A027BD592D00A27F34 /* AddItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D41C846C27BDE63D0058F103 /* PlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingView.swift; sourceTree = "<group>"; };
 		D42A9F0C27BD54E900F77379 /* Anki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42A9F0F27BD54E900F77379 /* AnkiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiApp.swift; sourceTree = "<group>"; };
 		D42A9F1127BD54E900F77379 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +28,9 @@
 		D42A9F1627BD54EA00F77379 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D42A9F1827BD54EA00F77379 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D42A9F1B27BD54EA00F77379 /* Anki.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anki.xcdatamodel; sourceTree = "<group>"; };
+		D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewModifier.swift; sourceTree = "<group>"; };
+		D4B4A07D27BD62C0005E4E97 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
+		D4E080A027BD592D00A27F34 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,8 @@
 		D42A9F0E27BD54E900F77379 /* Anki */ = {
 			isa = PBXGroup;
 			children = (
+				D4E0809F27BD591B00A27F34 /* View */,
+				D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */,
 				D42A9F0F27BD54E900F77379 /* AnkiApp.swift */,
 				D42A9F1127BD54E900F77379 /* ContentView.swift */,
 				D42A9F1327BD54EA00F77379 /* Assets.xcassets */,
@@ -71,6 +81,16 @@
 				D42A9F1627BD54EA00F77379 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D4E0809F27BD591B00A27F34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D4E080A027BD592D00A27F34 /* AddItemView.swift */,
+				D4B4A07D27BD62C0005E4E97 /* EditItemView.swift */,
+				D41C846C27BDE63D0058F103 /* PlayingView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,10 +163,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42A9F2327BD55CF00F77379 /* ErrorAlertViewModifier.swift in Sources */,
+				D4E080A127BD592D00A27F34 /* AddItemView.swift in Sources */,
 				D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */,
+				D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */,
 				D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */,
 				D42A9F1227BD54E900F77379 /* ContentView.swift in Sources */,
 				D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */,
+				D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +307,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,6 +337,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

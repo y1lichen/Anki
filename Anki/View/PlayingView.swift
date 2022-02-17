@@ -9,12 +9,30 @@ import SwiftUI
 
 struct PlayingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+        }
+        .background(NavigationConfigurator {
+            navigationConfigurator in
+            navigationConfigurator.hidesBarsOnTap = true
+        })
+        .statusBar(hidden: true)
     }
 }
 
-struct PlayingView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayingView()
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        let controller = UIViewController()
+        DispatchQueue.main.async {
+            if let navigationController = controller.navigationController {
+                self.configure(navigationController)
+            }
+        }
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController,
+                                context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
     }
 }

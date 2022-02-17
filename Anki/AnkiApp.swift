@@ -15,6 +15,7 @@ struct AnkiApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+				.withErrorAlert()
         }
     }
 }
