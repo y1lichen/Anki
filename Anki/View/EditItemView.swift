@@ -15,15 +15,15 @@ struct EditItemView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    init(item: Item, updateItem: @escaping () -> Void) {
+    init(item: Item, saveUpdatedItem: @escaping () -> Void) {
         self.item = item
-        self.updateItem = updateItem
+        self.saveUpdatedItem = saveUpdatedItem
         _newFront = State(initialValue: item.front!)
         _newBack = State(initialValue: item.back!)
         _newFrequency = State(initialValue: Float(item.frequency))
     }
 
-    private var updateItem: () -> Void
+    private var saveUpdatedItem: () -> Void
 
     var body: some View {
         Form {
@@ -42,23 +42,20 @@ struct EditItemView: View {
         }
         .navigationTitle(newFront)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton, trailing: saveButton)
+        .navigationBarItems(leading: BackButton(presentationMode: presentationMode), trailing: saveButton)
     }
-
-    var backButton: some View {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Image(systemName: "chevron.backward")
-                    .aspectRatio(contentMode: .fit)
-                Text("Back")
-            }
-        }
-    }
+	
+	func updateItem() {
+		item.front = newFront
+		item.back = newBack
+		item.frequency = Int64(newFrequency)
+		saveUpdatedItem()
+	}
 
     var saveButton: some View {
         Button(action: {
+			updateItem()
+			self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Save")
         }

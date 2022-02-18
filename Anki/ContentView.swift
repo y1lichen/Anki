@@ -20,7 +20,7 @@ struct ContentView: View {
 
     @State private var searchingText = ""
     @State private var showAddItemView = false
-
+	
     @State private var navigationTitle = "Anki"
 	
     var body: some View {
@@ -28,14 +28,14 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-						EditItemView(item: item, updateItem: updateItem)
+						EditItemView(item: item, saveUpdatedItem: saveUpdatedItem)
                     } label: {
                         VStack {
                             Text(item.front!)
                                 .font(.title2)
                                 .fontWeight(.bold)
                             Text("\(item.back!)")
-                                .offset(x: 10, y: 2)
+                                .offset(x: 10)
                                 .font(.body)
                         }
                     }
@@ -72,7 +72,12 @@ struct ContentView: View {
         }
     }
 
-    private func updateItem() {
+    private func saveUpdatedItem() {
+		do {
+			try viewContext.save()
+		} catch {
+			self.errorHandling.handleError(error: error)
+		}
     }
 
     private func openAddItemView() {

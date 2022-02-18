@@ -72,6 +72,7 @@ struct AddItemView: View {
             newItem.front = front
             newItem.back = back
             newItem.frequency = Int64(frequency)
+			newItem.timestamp = Date()
             do {
                 try viewContext.save()
             } catch {

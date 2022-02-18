@@ -8,13 +8,34 @@
 import SwiftUI
 
 struct PlayingView: View {
+    @State private var showTabBar: Bool = true
+
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var body: some View {
-        NavigationView {
+        VStack {
         }
         .background(NavigationConfigurator {
             navigationConfigurator in
             navigationConfigurator.hidesBarsOnTap = true
         })
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+				BackButton(presentationMode: presentationMode)
+            }
+            ToolbarItemGroup(placement: .bottomBar) {
+                Spacer()
+                Button(action: {}) {
+                    Label("Study", systemImage: "book")
+                }
+                Spacer()
+                Button(action: {}) {
+                    Label("Quiz", systemImage: "square.and.pencil")
+                }
+                Spacer()
+            }
+        }
         .statusBar(hidden: true)
     }
 }

@@ -15,6 +15,9 @@
 		D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1827BD54EA00F77379 /* Persistence.swift */; };
 		D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1A27BD54EA00F77379 /* Anki.xcdatamodeld */; };
 		D42A9F2327BD55CF00F77379 /* ErrorAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */; };
+		D46B7B5D27BF45F10038CEDC /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46B7B5C27BF45F10038CEDC /* StudyView.swift */; };
+		D46B7B5F27BF47F40038CEDC /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46B7B5E27BF47F40038CEDC /* QuizView.swift */; };
+		D46B7B6127BF54570038CEDC /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46B7B6027BF54570038CEDC /* BackButton.swift */; };
 		D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4A07D27BD62C0005E4E97 /* EditItemView.swift */; };
 		D4E080A127BD592D00A27F34 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E080A027BD592D00A27F34 /* AddItemView.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +32,9 @@
 		D42A9F1827BD54EA00F77379 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D42A9F1B27BD54EA00F77379 /* Anki.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anki.xcdatamodel; sourceTree = "<group>"; };
 		D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewModifier.swift; sourceTree = "<group>"; };
+		D46B7B5C27BF45F10038CEDC /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
+		D46B7B5E27BF47F40038CEDC /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		D46B7B6027BF54570038CEDC /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		D4B4A07D27BD62C0005E4E97 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		D4E080A027BD592D00A27F34 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +95,9 @@
 				D4E080A027BD592D00A27F34 /* AddItemView.swift */,
 				D4B4A07D27BD62C0005E4E97 /* EditItemView.swift */,
 				D41C846C27BDE63D0058F103 /* PlayingView.swift */,
+				D46B7B5C27BF45F10038CEDC /* StudyView.swift */,
+				D46B7B5E27BF47F40038CEDC /* QuizView.swift */,
+				D46B7B6027BF54570038CEDC /* BackButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,10 +174,13 @@
 			files = (
 				D42A9F2327BD55CF00F77379 /* ErrorAlertViewModifier.swift in Sources */,
 				D4E080A127BD592D00A27F34 /* AddItemView.swift in Sources */,
+				D46B7B6127BF54570038CEDC /* BackButton.swift in Sources */,
 				D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */,
 				D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */,
+				D46B7B5D27BF45F10038CEDC /* StudyView.swift in Sources */,
 				D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */,
 				D42A9F1227BD54E900F77379 /* ContentView.swift in Sources */,
+				D46B7B5F27BF47F40038CEDC /* QuizView.swift in Sources */,
 				D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */,
 				D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */,
 			);
