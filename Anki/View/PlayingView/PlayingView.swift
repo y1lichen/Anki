@@ -34,7 +34,7 @@ struct PlayingView: View {
         }
         .background(NavigationConfigurator {
             navigationConfigurator in
-            navigationConfigurator.hidesBarsOnTap = true
+            navigationConfigurator.hidesBarsOnSwipe = true
         })
         .navigationBarBackButtonHidden(true)
         .toolbar {
