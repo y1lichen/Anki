@@ -47,7 +47,8 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     NavigationLink(destination:
-									PlayingView()) {
+									PlayingView(openAddItemView: openAddItemView)
+									.withErrorAlert()) {
                         Image(systemName: "play.fill")
 					}
 				}

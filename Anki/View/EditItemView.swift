@@ -11,15 +11,18 @@ struct EditItemView: View {
     private var item: Item
     @State private var newFront: String
     @State private var newBack: String
+	@State private var newNote: String
     @State private var newFrequency: Float
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+	
+	
     init(item: Item, saveUpdatedItem: @escaping () -> Void) {
         self.item = item
         self.saveUpdatedItem = saveUpdatedItem
         _newFront = State(initialValue: item.front!)
         _newBack = State(initialValue: item.back!)
+		_newNote = State(initialValue: item.note!)
         _newFrequency = State(initialValue: Float(item.frequency))
     }
 
@@ -32,6 +35,11 @@ struct EditItemView: View {
                 TextField("Back", text: $newBack)
             }
 
+			Section(header: Text("Note")) {
+				TextEditor(text: $newNote)
+					.frame(height: 100)
+			}
+			
             Section(header: Text("Frequency: \(Int(newFrequency))")) {
                 Slider(value: $newFrequency, in: 0 ... 5, step: 1,
                        label: { Text("Frequency of notification") },
@@ -48,6 +56,7 @@ struct EditItemView: View {
 	func updateItem() {
 		item.front = newFront
 		item.back = newBack
+		item.note = newNote
 		item.frequency = Int64(newFrequency)
 		saveUpdatedItem()
 	}

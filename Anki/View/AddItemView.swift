@@ -16,6 +16,7 @@ struct AddItemView: View {
 
     @State private var front: String = ""
     @State private var back: String = ""
+	@State private var note: String = ""
     @State private var frequency: Float = 3.0
 
     var body: some View {
@@ -36,6 +37,11 @@ struct AddItemView: View {
                 TextField("Front", text: $front)
                 TextField("Back", text: $back)
             }
+			
+			Section(header: Text("Note")) {
+				TextEditor(text: $note)
+					.frame(height: 100)
+			}
 			
             Section(header: Text("Frequency: \(Int(frequency))")) {
                 Slider(value: $frequency, in: 0 ... 5, step: 1,
@@ -71,6 +77,7 @@ struct AddItemView: View {
             newItem.id = uuid
             newItem.front = front
             newItem.back = back
+			newItem.note = note
             newItem.frequency = Int64(frequency)
 			newItem.timestamp = Date()
             do {
