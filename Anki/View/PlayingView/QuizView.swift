@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct QuizView: View {
-    let goBackAndAddItem: () -> Void
+    
+	let goBackAndAddItem: () -> Void
     let itemCount: Int
     private var items: [Item]
+	
     @State private var shuffeldItems = [Item]()
 
     @State private var itemIndex: Int = 0 {
@@ -24,7 +26,9 @@ struct QuizView: View {
     @State private var selectedItem: Item
     @State private var frequency: Int = 0
 
-    @State private var options = [String]()
+	@State private var isWrong: Bool = false
+	
+	@State private var options = [String]()
 
     init(items: [Item], goBackAndAddItem: @escaping () -> Void) {
         itemCount = items.count
@@ -41,23 +45,26 @@ struct QuizView: View {
             AltView(goBackAndAddItem: goBackAndAddItem)
         } else {
             VStack {
+				Spacer()
                 Text(selectedItem.front!)
                     .font(.system(size: 50))
                     .fontWeight(.bold)
                     .padding(.top, 10)
                 Spacer()
+					.frame(height: 60)
 				ForEach(options, id: \.self) { option in
-					OptionButton(text: option, handleSelectOption: handleSelectOption)
-						.padding(.bottom, 5)
+					OptionButton(option: option, item: selectedItem.back!, next: next, isWrong: $isWrong)
+						.padding(.bottom, 15)
 				}
 				Spacer()
-					.frame(height: 40)
+					.frame(height: 45)
                 Button(action: {
                     next()
                 }) {
                     Image(systemName: "arrowtriangle.right.circle.fill")
                         .font(.system(size: 60))
-                }.padding(.bottom, 40)
+                }.padding()
+				Spacer()
                 Stepper("Frequency: \(frequency)", value: $frequency, in: 0 ... 5, step: 1)
                     .frame(width: 320)
                     .padding(.bottom, 30)
@@ -87,9 +94,7 @@ struct QuizView: View {
 
     private func getWeightedShuffledItemsForNextItem() -> [Item] {
         var result = [Item]()
-        let baseItems = items.filter {
-            $0 != selectedItem
-        }
+        let baseItems = items.filter { $0 != selectedItem }
         baseItems.forEach { item in
             result.append(contentsOf: Array(repeating: item, count: Int(item.frequency)))
         }
@@ -111,21 +116,31 @@ struct QuizView: View {
         }
     }
 
-    private func handleSelectOption() {
-    }
-
     private struct OptionButton: View {
-        let text: String
-        let handleSelectOption: () -> Void
+        let option: String
+		let item: String
+		let next: () -> Void
+		@Binding var isWrong: Bool
+		
+		private func handleOnClick() {
+			if option != item {
+				isWrong = true
+			} else {
+				next()
+			}
+		}
+		
         var body: some View {
-            Button(action: { handleSelectOption() }) {
-                Text(text)
+            Button(action: { handleOnClick() }) {
+                Text(option)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
-					.frame(width: 120)
-					.buttonBorderShape(.capsule)
-					.border(.blue)
+					.frame(width: 160, height: 68)
+					.overlay(
+						   RoundedRectangle(cornerRadius: 40)
+							.stroke(.blue, lineWidth: 5)
+					   )
             }
         }
     }
