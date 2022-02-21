@@ -21,8 +21,9 @@ struct QuizView: View {
             options = getOptions()
         }
     }
-
-    @State private var selectedItem: Item
+	
+	private var itemsIsEmpty: Bool = false
+    @State private var selectedItem: Item!
     @State private var frequency: Int = 0
 
     @State private var isWrong: Bool = false
@@ -33,10 +34,11 @@ struct QuizView: View {
         itemCount = items.count
         self.goBackAndAddItem = goBackAndAddItem
         self.items = items
-        _selectedItem = State(initialValue: items.shuffled()[0])
+		if items.isEmpty { itemsIsEmpty = true }
+		_selectedItem = State(initialValue: itemsIsEmpty ? nil : items.shuffled()[0])
         _shuffeldItems = State(initialValue: items.shuffled())
-        _frequency = State(initialValue: Int(shuffeldItems[itemIndex].frequency))
-        _options = State(initialValue: getOptions())
+		_frequency = State(initialValue: Int(itemsIsEmpty ? 0 : shuffeldItems[itemIndex].frequency))
+		_options = State(initialValue: itemsIsEmpty ? [] : getOptions())
     }
 
     var body: some View {
@@ -100,7 +102,7 @@ struct QuizView: View {
         return result
     }
 
-    private struct AltView: View {
+    struct AltView: View {
         let goBackAndAddItem: () -> Void
         var body: some View {
             VStack {
@@ -130,9 +132,15 @@ private struct OptionButton: View {
 		}
 	}
 	
+	private func errorNotification() {
+		let generator = UINotificationFeedbackGenerator()
+		generator.notificationOccurred(.error)
+	}
+	
     private func handleOnClick() {
         if option != item {
             isWrong = true
+			errorNotification()
 			changeColorAnimation()
         } else {
             next()
