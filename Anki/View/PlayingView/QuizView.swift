@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct QuizView: View {
+	let context = PersistenceController.shared.container.viewContext
+	
     let goBackAndAddItem: () -> Void
     let itemCount: Int
     private var items: [Item]
@@ -23,12 +25,12 @@ struct QuizView: View {
     }
 	
 	private var itemsIsEmpty: Bool = false
+	
     @State private var selectedItem: Item!
-    @State private var frequency: Int = 0
+	@State private var frequency: Int = 0
 
     @State private var isWrong: Bool = false
-
-    @State private var options = [String]()
+	@State private var options = [String]()
 
     init(items: [Item], goBackAndAddItem: @escaping () -> Void) {
         itemCount = items.count
@@ -36,7 +38,7 @@ struct QuizView: View {
         self.items = items
 		if items.isEmpty { itemsIsEmpty = true }
 		_selectedItem = State(initialValue: itemsIsEmpty ? nil : items.shuffled()[0])
-        _shuffeldItems = State(initialValue: items.shuffled())
+		_shuffeldItems = State(initialValue: items.shuffled())
 		_frequency = State(initialValue: Int(itemsIsEmpty ? 0 : shuffeldItems[itemIndex].frequency))
 		_options = State(initialValue: itemsIsEmpty ? [] : getOptions())
     }
@@ -69,6 +71,10 @@ struct QuizView: View {
                 Stepper("Frequency: \(frequency)", value: $frequency, in: 0 ... 5, step: 1)
                     .frame(width: 320)
                     .padding(.bottom, 30)
+					.onChange(of: frequency) { newValue in
+						selectedItem.frequency = Int64(newValue)
+						try? context.save()
+					}
             }
         }
     }
@@ -132,7 +138,7 @@ private struct OptionButton: View {
 		}
 	}
 	
-	private func errorNotification() {
+	private func errorVibration() {
 		let generator = UINotificationFeedbackGenerator()
 		generator.notificationOccurred(.error)
 	}
@@ -140,7 +146,7 @@ private struct OptionButton: View {
     private func handleOnClick() {
         if option != item {
             isWrong = true
-			errorNotification()
+			errorVibration()
 			changeColorAnimation()
         } else {
             next()
