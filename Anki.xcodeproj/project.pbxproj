@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C846C27BDE63D0058F103 /* PlayingView.swift */; };
+		D4235A3A27C67F5800C93345 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4235A3927C67F5800C93345 /* UserSettings.swift */; };
+		D4235A4127C6832100C93345 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4235A4027C6832100C93345 /* ItemModel.swift */; };
 		D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F0F27BD54E900F77379 /* AnkiApp.swift */; };
 		D42A9F1227BD54E900F77379 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1127BD54E900F77379 /* ContentView.swift */; };
 		D42A9F1427BD54EA00F77379 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D42A9F1327BD54EA00F77379 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		D41C846C27BDE63D0058F103 /* PlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingView.swift; sourceTree = "<group>"; };
+		D4235A3927C67F5800C93345 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		D4235A4027C6832100C93345 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		D42A9F0C27BD54E900F77379 /* Anki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42A9F0F27BD54E900F77379 /* AnkiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiApp.swift; sourceTree = "<group>"; };
 		D42A9F1127BD54E900F77379 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				D42A9F1827BD54EA00F77379 /* Persistence.swift */,
 				D42A9F1A27BD54EA00F77379 /* Anki.xcdatamodeld */,
 				D42A9F1527BD54EA00F77379 /* Preview Content */,
+				D4235A3927C67F5800C93345 /* UserSettings.swift */,
+				D4235A4027C6832100C93345 /* ItemModel.swift */,
 			);
 			path = Anki;
 			sourceTree = "<group>";
@@ -187,6 +193,7 @@
 				D4E080A127BD592D00A27F34 /* AddItemView.swift in Sources */,
 				D46B7B6127BF54570038CEDC /* BackButton.swift in Sources */,
 				D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */,
+				D4235A3A27C67F5800C93345 /* UserSettings.swift in Sources */,
 				D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */,
 				D46B7B5D27BF45F10038CEDC /* StudyView.swift in Sources */,
 				D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */,
@@ -194,6 +201,7 @@
 				D46B7B5F27BF47F40038CEDC /* QuizView.swift in Sources */,
 				D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */,
 				D45BAB2A27C5323B00FFCBAE /* CardView.swift in Sources */,
+				D4235A4127C6832100C93345 /* ItemModel.swift in Sources */,
 				D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

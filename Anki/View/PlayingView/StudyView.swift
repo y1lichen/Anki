@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StudyView: View {
+	
     let items: [Item]
     let goBackAndAddItem: () -> Void
 

@@ -5,32 +5,34 @@
 //  Created by 陳奕利 on 2022/2/17.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct PlayingView: View {
+    @ObservedObject var userSettings = UserSettings()
+	@StateObject var itemModel: ItemModel = ItemModel()
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	@EnvironmentObject var errorHandling: ErrorHandling
-	private var items = [Item]()
+    @EnvironmentObject var errorHandling: ErrorHandling
+    var items = [Item]()
 
-	let context = PersistenceController.shared.container.viewContext
+    let context = PersistenceController.shared.container.viewContext
 
-	let openAddItemView: () -> Void
+    let openAddItemView: () -> Void
 
-	init(openAddItemView: @escaping () -> Void) {
-		self.openAddItemView = openAddItemView
-		self.items = fetchAllItem()
-	}
+    init(openAddItemView: @escaping () -> Void) {
+        self.openAddItemView = openAddItemView
+    }
 
-	@State private var isStudyView: Bool = true
+    @State private var isStudyView: Bool = true
 
     var body: some View {
         VStack {
-			if isStudyView {
-				StudyView(items: items, goBackAndAddItem: goBackAndAddItem)
-			} else {
-				QuizView(items: items, goBackAndAddItem: goBackAndAddItem)
-			}
+            if isStudyView {
+				StudyView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
+            } else {
+                QuizView(items: items, goBackAndAddItem: goBackAndAddItem)
+            }
         }
         .background(NavigationConfigurator {
             navigationConfigurator in
@@ -39,35 +41,38 @@ struct PlayingView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-				BackButton(presentationMode: presentationMode)
+                BackButton(presentationMode: presentationMode)
             }
 
-			ToolbarItemGroup(placement: .navigationBarTrailing) {
-				if isStudyView {
-					Menu {
-						Text("Sort by:")
-							.fontWeight(.bold)
-						Button("front", action: {})
-						Button("back", action: {})
-						Button("time", action: {})
-					} label: {
-						Label("Sort by", systemImage: "arrow.up.arrow.down")
-					}
-
-				}
-			}
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                if isStudyView {
+                    Menu {
+						Picker("Sort by:", selection: $userSettings.sortMethod) {
+                            Text("Front").tag(0)
+                            Text("Back").tag(1)
+                            Text("Added time").tag(2)
+                        }
+						.onChange(of: userSettings.sortMethod) { newValue in
+							userSettings.sortMethod = newValue
+							itemModel.fetchAllItem()
+						}
+                    } label: {
+                        Label("Sort by", systemImage: "arrow.up.arrow.down")
+                    }
+                }
+            }
 
             ToolbarItemGroup(placement: .bottomBar) {
                 Spacer()
                 Button(action: {
-					isStudyView = true
-				}) {
+                    isStudyView = true
+                }) {
                     Label("Study", systemImage: "book")
                 }
                 Spacer()
                 Button(action: {
-					isStudyView = false
-				}) {
+                    isStudyView = false
+                }) {
                     Label("Quiz", systemImage: "square.and.pencil")
                 }
                 Spacer()
@@ -76,31 +81,10 @@ struct PlayingView: View {
         .statusBar(hidden: true)
     }
 
-	private func goBackAndAddItem() {
-		self.presentationMode.wrappedValue.dismiss()
-		openAddItemView()
-	}
-
-	// 0 => time, 1 => front, 2 => back
-	private func fetchAllItem(sortMethod: Int = 0) -> [Item] {
-		var result: [Item] = []
-		do {
-			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
-			var sectionSortDescriptor: NSSortDescriptor
-			if sortMethod == 0 {
-				sectionSortDescriptor = NSSortDescriptor(key: "timestamp", ascending: true)
-			} else if sortMethod == 1 {
-				sectionSortDescriptor = NSSortDescriptor(key: "front", ascending: true)
-			} else {
-				sectionSortDescriptor = NSSortDescriptor(key: "back", ascending: true)
-			}
-			fetchRequest.sortDescriptors = [sectionSortDescriptor]
-			result = try context.fetch(fetchRequest) as! [Item]
-		} catch {
-			self.errorHandling.handleError(error: error)
-		}
-		return result
-	}
+    private func goBackAndAddItem() {
+        presentationMode.wrappedValue.dismiss()
+        openAddItemView()
+    }
 }
 
 struct NavigationConfigurator: UIViewControllerRepresentable {
