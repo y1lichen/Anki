@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizView: View {
 	let context = PersistenceController.shared.container.viewContext
-	
+
     let goBackAndAddItem: () -> Void
     let itemCount: Int
     private var items: [Item]
@@ -23,9 +23,9 @@ struct QuizView: View {
             options = getOptions()
         }
     }
-	
+
 	private var itemsIsEmpty: Bool = false
-	
+
     @State private var selectedItem: Item!
 	@State private var frequency: Int = 0
 
@@ -137,12 +137,12 @@ private struct OptionButton: View {
 		   currentColorIsBlue = true
 		}
 	}
-	
+
 	private func errorVibration() {
 		let generator = UINotificationFeedbackGenerator()
 		generator.notificationOccurred(.error)
 	}
-	
+
     private func handleOnClick() {
         if option != item {
             isWrong = true

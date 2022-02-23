@@ -12,18 +12,18 @@ struct PlayingView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@EnvironmentObject var errorHandling: ErrorHandling
 	private var items = [Item]()
-	
+
 	let context = PersistenceController.shared.container.viewContext
-	
+
 	let openAddItemView: () -> Void
-	
+
 	init(openAddItemView: @escaping () -> Void) {
 		self.openAddItemView = openAddItemView
 		self.items = fetchAllItem()
 	}
-	
+
 	@State private var isStudyView: Bool = true
-	
+
     var body: some View {
         VStack {
 			if isStudyView {
@@ -41,6 +41,22 @@ struct PlayingView: View {
             ToolbarItem(placement: .navigationBarLeading) {
 				BackButton(presentationMode: presentationMode)
             }
+
+			ToolbarItemGroup(placement: .navigationBarTrailing) {
+				if isStudyView {
+					Menu {
+						Text("Sort by:")
+							.fontWeight(.bold)
+						Button("front", action: {})
+						Button("back", action: {})
+						Button("time", action: {})
+					} label: {
+						Label("Sort by", systemImage: "arrow.up.arrow.down")
+					}
+
+				}
+			}
+
             ToolbarItemGroup(placement: .bottomBar) {
                 Spacer()
                 Button(action: {
@@ -59,12 +75,12 @@ struct PlayingView: View {
         }
         .statusBar(hidden: true)
     }
-	
+
 	private func goBackAndAddItem() {
 		self.presentationMode.wrappedValue.dismiss()
 		openAddItemView()
 	}
-	
+
 	// 0 => time, 1 => front, 2 => back
 	private func fetchAllItem(sortMethod: Int = 0) -> [Item] {
 		var result: [Item] = []
