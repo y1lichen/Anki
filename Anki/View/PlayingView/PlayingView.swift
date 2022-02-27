@@ -13,11 +13,7 @@ struct PlayingView: View {
 	@StateObject var itemModel: ItemModel = ItemModel()
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var errorHandling: ErrorHandling
-    var items = [Item]()
-
-    let context = PersistenceController.shared.container.viewContext
-
+	
     let openAddItemView: () -> Void
 
     init(openAddItemView: @escaping () -> Void) {
@@ -31,7 +27,7 @@ struct PlayingView: View {
             if isStudyView {
 				StudyView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
             } else {
-                QuizView(items: items, goBackAndAddItem: goBackAndAddItem)
+				QuizView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
             }
         }
         .background(NavigationConfigurator {
@@ -51,7 +47,7 @@ struct PlayingView: View {
                             Text("Front").tag(0)
                             Text("Back").tag(1)
                             Text("Added time").tag(2)
-                        }
+						}
 						.onChange(of: userSettings.sortMethod) { newValue in
 							userSettings.sortMethod = newValue
 							itemModel.fetchAllItem()
