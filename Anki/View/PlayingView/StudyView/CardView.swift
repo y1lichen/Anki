@@ -13,21 +13,23 @@ struct CardView: View {
     let back: String
     let note: String
 
+	let width = UIScreen.main.bounds.width / 1.5
     var body: some View {
-        FlipView(front: FrontCardView(front: front),
-				 back: BackCardView(back: back, note: note),
+        FlipView(front: FrontCardView(front: front, width: width),
+				 back: BackCardView(back: back, note: note, width: width),
 				 showBack: $showBack)
     }
 }
 
 struct FrontCardView: View {
     let front: String
+	let width: Double
     var body: some View {
         Text(front)
             .fontWeight(.bold)
-            .font(.system(size: 50))
+			.font(.system(size: 50))
             .minimumScaleFactor(0.4)
-            .frame(width: 300, height: 400)
+			.frame(width: width, height: 400)
             .background(Color(UIColor.systemBackground))
             .overlay(RoundedRectangle(cornerRadius: 25.0, style: .circular)
                 .stroke(.blue, lineWidth: 8))
@@ -37,11 +39,12 @@ struct FrontCardView: View {
 struct BackCardView: View {
     let back: String
     let note: String
+	let width: Double
     var body: some View {
         VStack {
             Text(back)
                 .fontWeight(.bold)
-                .font(.system(size: 50))
+				.font(.system(size: 50))
                 .minimumScaleFactor(0.4)
             Spacer()
                 .frame(height: 30)
@@ -51,7 +54,7 @@ struct BackCardView: View {
                 .padding(.horizontal, 10)
         }
         .padding(15)
-		.frame(width: 300, height: 400)
+		.frame(width: width, height: 400)
 		.background(Color(UIColor.systemBackground))
 		.overlay(RoundedRectangle(cornerRadius: 25.0, style: .circular)
 			.stroke(.blue, lineWidth: 8))
