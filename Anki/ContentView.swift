@@ -50,7 +50,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
 					NavigationLink {
-						SettingsView()
+						SettingsView(items: items)
 							.navigationTitle("Settings")
 					} label: {
 						Image(systemName: "gear")

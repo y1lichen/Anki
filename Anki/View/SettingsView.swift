@@ -8,9 +8,38 @@
 import SwiftUI
 
 struct SettingsView: View {
-	@AppStorage("sortMethod") private var sortMethod = 0
 	
+	@State private var isExport: Bool = false
+	@State private var showAlert: Bool = false
+	
+	@AppStorage("sortMethod") private var sortMethod = 0
     @AppStorage("schemeMode") private var schemeMode = 0
+	
+	var items: FetchedResults<Item>
+
+	
+	let dateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "y_MM_dd_HH:mm:ss"
+		return formatter
+	}()
+	
+	private func createDocument() -> ExportDocument {
+		var document: ExportDocument
+		var data: String = "Front,Back,Note,timetamp\n"
+		for item in items {
+			data += "\(item.front!),\(item.back!),\(item.note!),\(item.timestamp!.description)\n"
+		}
+		document = ExportDocument(documentData: data)
+		return document
+	}
+	
+	private func getExportDocumentFileName() -> String {
+		var result: String = "anki"
+		result += dateFormatter.string(from: Date())
+		return result
+	}
+	
     var body: some View {
         Form {
             Picker(selection: $schemeMode) {
@@ -28,10 +57,25 @@ struct SettingsView: View {
 				Text("Sort by")
 			}
 
-            Button(action: {}) {
+            Button(action: {
+				isExport = true
+			}) {
                 Text("Export CSV File")
             }
 		}
+		.alert("Error!", isPresented: $showAlert, actions: {
+			Button("Ok", role: .none, action: {})
+		}, message:{
+			Text("Unable to export CSV file.")
+		})
+		.fileExporter(isPresented: $isExport,
+					  document: createDocument(),
+					  contentType: .commaSeparatedText,
+					  defaultFilename: getExportDocumentFileName())
+		{ result in
+			if case .failure = result {
+				showAlert = true
+			}
+		}
     }
 }
-
