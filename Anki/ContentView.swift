@@ -9,6 +9,9 @@ import CoreData
 import SwiftUI
 
 struct ContentView: View {
+	
+	@AppStorage("schemeMode") private var schemeMode = 0
+	
     @EnvironmentObject var errorHandling: ErrorHandling
 
     @Environment(\.managedObjectContext) private var viewContext
@@ -46,11 +49,13 @@ struct ContentView: View {
             .navigationTitle(navigationTitle)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination:
-									PlayingView(openAddItemView: openAddItemView)
-									.withErrorAlert()) {
-                        Image(systemName: "play.fill")
+					NavigationLink {
+						SettingsView()
+							.navigationTitle("Settings")
+					} label: {
+						Image(systemName: "gear")
 					}
+
 				}
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -60,6 +65,13 @@ struct ContentView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+				ToolbarItem(placement: .bottomBar) {
+					NavigationLink(destination:
+									PlayingView(openAddItemView: openAddItemView)
+									.withErrorAlert()) {
+						Image(systemName: "play.fill")
+					}
+				}
 			}
 			.onAppear(perform: {
                 navigationTitle = "Anki"
@@ -71,7 +83,18 @@ struct ContentView: View {
         .sheet(isPresented: $showAddItemView) {
             AddItemView().withErrorAlert()
         }
-    }
+		.preferredColorScheme({
+			if schemeMode == 0 {
+				return .none
+			} else if schemeMode == 1 {
+				return .light
+			} else if schemeMode == 2 {
+				return .dark
+			} else {
+				return .none
+			}
+		}())
+	}
 
     private func saveUpdatedItem() {
 		do {

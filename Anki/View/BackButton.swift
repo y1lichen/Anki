@@ -17,6 +17,7 @@ struct BackButton: View {
 				Image(systemName: "chevron.backward")
 					.aspectRatio(contentMode: .fit)
 				Text("Back")
+					.foregroundColor(.blue)
 			}
 		}
 	}

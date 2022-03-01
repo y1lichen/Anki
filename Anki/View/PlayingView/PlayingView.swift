@@ -26,7 +26,6 @@ struct PlayingView: View {
         VStack {
             if isStudyView {
 				StudyView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
-//				StudyView(goBackAndAddItem: goBackAndAddItem)
 			} else {
 				QuizView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
             }
