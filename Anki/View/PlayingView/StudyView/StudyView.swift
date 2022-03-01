@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct StudyView: View {
-    @State var items: [Item]
+    var items: [Item]
+	@State var genericItems: [Item] = []
     @State var fakeIndex = 0
     let goBackAndAddItem: () -> Void
 
-	@State var offset: CGFloat = 0
-	
+    @State var offset: CGFloat = 0
+
     init(items: [Item], goBackAndAddItem: @escaping () -> Void) {
         self.items = items
         self.goBackAndAddItem = goBackAndAddItem
@@ -23,50 +24,60 @@ struct StudyView: View {
         if items.isEmpty {
             AltView(goBackAndAddItem: goBackAndAddItem)
         } else {
-			VStack(alignment: .center) {
+            VStack(alignment: .center) {
                 TabView(selection: $fakeIndex) {
-                    ForEach(items) { item in
+                    ForEach(items.indices, id: \.self) { idx in
+                        let item = items[idx]
                         GeometryReader { geometryProxy in
                             let scale = getScale(proxy: geometryProxy)
                             CardView(front: item.front!, back: item.back!, note: item.note!)
-								.padding(.horizontal, 50)
+                                .padding(.horizontal, 50)
                                 .frame(height: geometryProxy.size.height)
                                 .scaleEffect(CGSize(width: scale, height: scale))
                                 .animation(.easeOut(duration: 0.5), value: 1)
                         }
-						.overlay(
-							GeometryReader { proxy in
-								Color.clear.preference(key: OffSetKey.self,
-													   value: proxy.frame(in: .global).minX)
-							})
-						.onPreferenceChange(OffSetKey.self, perform: { offset in
-							self.offset = offset
-						})
-						.tag(getIndex(item: item))
-					}.padding(.top, 120)
-				}.padding()
+                        .overlay(
+                            GeometryReader { proxy in
+                                Color.clear.preference(key: OffSetKey.self,
+                                                       value: proxy.frame(in: .global).minX)
+                            })
+                        .onPreferenceChange(OffSetKey.self, perform: { offset in
+                            self.offset = offset
+                        })
+                        .tag(getIndex(item: item))
+                    }.padding(.top, 120)
+                }
+                .padding()
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .onChange(of: fakeIndex) { _ in
-                if fakeIndex == 0 {
-                    fakeIndex = items.count - 2
+            .onChange(of: offset) { _ in
+                if fakeIndex == 0 && offset == 0 {
+                    fakeIndex = genericItems.count - 2
                 }
-                if fakeIndex == items.count - 1 {
+                if fakeIndex == genericItems.count - 1 && offset == 0 {
                     fakeIndex = 1
                 }
             }
+			.onChange(of: items, perform: { _ in
+				genericItems = items
+				guard let first = genericItems.first else { return }
+				guard let last = genericItems.last else { return }
+				genericItems.append(first)
+				genericItems.insert(last, at: 0)
+			})
             .onAppear {
-                guard let first = items.first else { return }
-                guard let last = items.last else { return }
-                items.append(first)
-                items.insert(last, at: 0)
+				genericItems = items
+                guard let first = genericItems.first else { return }
+                guard let last = genericItems.last else { return }
+                genericItems.append(first)
+                genericItems.insert(last, at: 0)
                 fakeIndex = 1
             }
         }
     }
 
     private func getIndex(item: Item) -> Int {
-        let index = items.firstIndex(of: item) ?? 0
+        let index = genericItems.firstIndex(of: item) ?? 0
         return index
     }
 
@@ -95,8 +106,8 @@ struct StudyView: View {
 }
 
 struct OffSetKey: PreferenceKey {
-	static var defaultValue: CGFloat = 0
-	static func reduce(value: inout Value, nextValue: () -> CGFloat) {
-		value = nextValue()
-	}
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout Value, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
 }

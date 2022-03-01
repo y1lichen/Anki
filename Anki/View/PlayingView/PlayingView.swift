@@ -9,11 +9,11 @@ import CoreData
 import SwiftUI
 
 struct PlayingView: View {
-    @ObservedObject var userSettings = UserSettings()
-	@StateObject var itemModel: ItemModel = ItemModel()
+    
+    var itemModel: ItemModel = ItemModel()
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	
+
     let openAddItemView: () -> Void
 
     init(openAddItemView: @escaping () -> Void) {
@@ -25,9 +25,9 @@ struct PlayingView: View {
     var body: some View {
         VStack {
             if isStudyView {
-				StudyView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
-			} else {
-				QuizView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
+                StudyView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
+            } else {
+                QuizView(items: itemModel.items, goBackAndAddItem: goBackAndAddItem)
             }
         }
         .background(NavigationConfigurator {
@@ -40,38 +40,20 @@ struct PlayingView: View {
                 BackButton(presentationMode: presentationMode)
             }
 
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                if isStudyView {
-                    Menu {
-						Picker("Sort by:", selection: $userSettings.sortMethod) {
-                            Text("Front").tag(0)
-                            Text("Back").tag(1)
-                            Text("Added time").tag(2)
-						}
-						.onChange(of: userSettings.sortMethod) { newValue in
-							userSettings.sortMethod = newValue
-							itemModel.fetchAllItem()
-						}
-                    } label: {
-                        Label("Sort by", systemImage: "arrow.up.arrow.down")
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if !isStudyView {
+                    Button(action: {
+                        isStudyView = true
+                    }) {
+                        Label("Study", systemImage: "book")
+                    }
+                } else {
+                    Button(action: {
+                        isStudyView = false
+                    }) {
+                        Label("Quiz", systemImage: "square.and.pencil")
                     }
                 }
-            }
-
-            ToolbarItemGroup(placement: .bottomBar) {
-                Spacer()
-                Button(action: {
-                    isStudyView = true
-                }) {
-                    Label("Study", systemImage: "book")
-                }
-                Spacer()
-                Button(action: {
-                    isStudyView = false
-                }) {
-                    Label("Quiz", systemImage: "square.and.pencil")
-                }
-                Spacer()
             }
         }
         .statusBar(hidden: true)
