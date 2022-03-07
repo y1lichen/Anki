@@ -46,6 +46,9 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .searchable(text: $searchingText)
+			.onChange(of: searchingText, perform: { newValue in
+				items.nsPredicate = newValue.isEmpty ? nil : NSPredicate(format: "front CONTAINS[c] %@ OR back CONTAINS[c] %@", newValue, newValue)
+			})
             .navigationTitle(navigationTitle)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
