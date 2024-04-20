@@ -104,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				D4E0809F27BD591B00A27F34 /* View */,
-				D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */,
 				D42A9F0F27BD54E900F77379 /* AnkiApp.swift */,
 				D42A9F1327BD54EA00F77379 /* Assets.xcassets */,
 				D42A9F1827BD54EA00F77379 /* Persistence.swift */,
@@ -159,6 +158,23 @@
 			path = widget;
 			sourceTree = "<group>";
 		};
+		D44CACB42BD42D0A0089F643 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				D44CACB52BD42D140089F643 /* widget */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		D44CACB52BD42D140089F643 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */,
+				D46B7B6027BF54570038CEDC /* BackButton.swift */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
 		D45E26E527BFD11800140B3A /* PlayingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,11 +189,11 @@
 		D4E0809F27BD591B00A27F34 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D44CACB42BD42D0A0089F643 /* common */,
 				D44CACA92BD3AA6D0089F643 /* MainPage */,
 				D44CACA82BD3AA5D0089F643 /* EditItem */,
 				D44CACA72BD3AA340089F643 /* Settings */,
 				D45E26E527BFD11800140B3A /* PlayingView */,
-				D46B7B6027BF54570038CEDC /* BackButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
