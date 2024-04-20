@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct StudyView: View {
-    var items: [Item]
+	@StateObject var itemViewModel: ItemViewModel = ItemViewModel()
 	@State var genericItems: [Item] = []
     @State var fakeIndex = 0
     let goBackAndAddItem: () -> Void
 
     @State var offset: CGFloat = 0
 
-    init(items: [Item], goBackAndAddItem: @escaping () -> Void) {
-        self.items = items
+    init(goBackAndAddItem: @escaping () -> Void) {
         self.goBackAndAddItem = goBackAndAddItem
     }
 
     var body: some View {
-        if items.isEmpty {
+		if itemViewModel.items.isEmpty {
             AltView(goBackAndAddItem: goBackAndAddItem)
         } else {
             VStack(alignment: .center) {
                 TabView(selection: $fakeIndex) {
-                    ForEach(items.indices, id: \.self) { idx in
-                        let item = items[idx]
+					ForEach(itemViewModel.items.indices, id: \.self) { idx in
+						let item = itemViewModel.items[idx]
                         GeometryReader { geometryProxy in
                             let scale = getScale(proxy: geometryProxy)
                             CardView(front: item.front!, back: item.back!, note: item.note!)
@@ -58,15 +57,15 @@ struct StudyView: View {
                     fakeIndex = 1
                 }
             }
-			.onChange(of: items, perform: { _ in
-				genericItems = items
+			.onChange(of: itemViewModel.items, perform: { _ in
+				genericItems = itemViewModel.items
 				guard let first = genericItems.first else { return }
 				guard let last = genericItems.last else { return }
 				genericItems.append(first)
 				genericItems.insert(last, at: 0)
 			})
             .onAppear {
-				genericItems = items
+				genericItems = itemViewModel.items
                 guard let first = genericItems.first else { return }
                 guard let last = genericItems.last else { return }
                 genericItems.append(first)

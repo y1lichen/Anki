@@ -9,10 +9,6 @@ import SwiftUI
 
 struct EditItemView: View {
     private var item: Item
-    @State private var newFront: String
-    @State private var newBack: String
-	@State private var newNote: String
-    @State private var newFrequency: Float
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	

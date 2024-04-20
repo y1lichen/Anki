@@ -20,6 +20,7 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.front, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+	@StateObject var viewModel = ItemViewModel()
 
     @State private var searchingText = ""
     @State private var showAddItemView = false
@@ -113,13 +114,10 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                self.errorHandling.handleError(error: error)
-            }
+			offsets.forEach { idx in
+				let item = viewModel.items[idx]
+				viewModel.delete(item)
+			}
         }
     }
 }

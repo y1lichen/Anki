@@ -9,15 +9,10 @@ import SwiftUI
 
 struct AddItemView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var viewModel = ItemViewModel()
 
     @EnvironmentObject var errorHandling: ErrorHandling
     @State private var showAlert: Bool = false
-
-    @State private var front: String = ""
-    @State private var back: String = ""
-	@State private var note: String = ""
-    @State private var frequency: Float = 3.0
 
     var body: some View {
         Form {
@@ -34,17 +29,17 @@ struct AddItemView: View {
             }.listRowBackground(Color(UIColor.systemGroupedBackground))
 
             Section(header: Text("Card")) {
-                TextField("Front", text: $front)
-                TextField("Back", text: $back)
+				TextField("Front", text: $viewModel.front)
+				TextField("Back", text: $viewModel.back)
             }
 			
 			Section(header: Text("Note")) {
-				TextEditor(text: $note)
+				TextEditor(text: $viewModel.note)
 					.frame(height: 100)
 			}
 			
-            Section(header: Text("Frequency: \(Int(frequency))")) {
-                Slider(value: $frequency, in: 0 ... 5, step: 1,
+			Section(header: Text("Frequency: \(Int(viewModel.frequency))")) {
+				Slider(value: $viewModel.frequency, in: 0 ... 5, step: 1,
                        label: { Text("Frequency of notification") },
                        minimumValueLabel: { Text("0") },
                        maximumValueLabel: { Text("5") }
@@ -63,28 +58,9 @@ struct AddItemView: View {
 		}
     }
 
-    private func checkValid() -> Bool {
-        if front.isEmpty || back.isEmpty {
-            return false
-        }
-        return true
-    }
-
     private func addItem() {
-        if checkValid() {
-            let newItem = Item(context: viewContext)
-            let uuid = UUID()
-            newItem.id = uuid
-            newItem.front = front
-            newItem.back = back
-			newItem.note = note
-            newItem.frequency = Int64(frequency)
-			newItem.timestamp = Date()
-            do {
-                try viewContext.save()
-            } catch {
-                errorHandling.handleError(error: error)
-            }
+		if viewModel.checkValid() {
+			viewModel.saveNewItem()
         } else {
             showAlert = true
         }
