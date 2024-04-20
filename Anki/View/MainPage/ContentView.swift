@@ -14,12 +14,6 @@ struct ContentView: View {
 	
     @EnvironmentObject var errorHandling: ErrorHandling
 
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.front, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
 	@StateObject var viewModel = ItemViewModel()
 
     @State private var searchingText = ""
@@ -30,7 +24,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
+				ForEach(viewModel.items) { item in
                     NavigationLink {
 						EditItemView(item: item)
                     } label: {
@@ -54,7 +48,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
 					NavigationLink {
-						SettingsView(items: items)
+						SettingsView()
 							.navigationTitle("Settings")
 					} label: {
 						Image(systemName: "gear")

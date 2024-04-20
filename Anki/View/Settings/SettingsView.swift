@@ -15,7 +15,7 @@ struct SettingsView: View {
 	@AppStorage("sortMethod") private var sortMethod = 0
     @AppStorage("schemeMode") private var schemeMode = 0
 	
-	var items: FetchedResults<Item>
+	@StateObject var viewModel = ItemViewModel()
 
 	
 	let dateFormatter: DateFormatter = {
@@ -27,7 +27,7 @@ struct SettingsView: View {
 	private func createDocument() -> ExportDocument {
 		var document: ExportDocument
 		var data: String = "Front,Back,Note,timetamp\n"
-		for item in items {
+		for item in viewModel.items {
 			data += "\(item.front!),\(item.back!),\(item.note!),\(item.timestamp!.description)\n"
 		}
 		document = ExportDocument(documentData: data)
