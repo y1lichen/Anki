@@ -13,6 +13,16 @@ class CoreDataManager {
 	
 	let context = PersistenceController.shared.container.viewContext
 	
+	func selectItemByPattern(_ pattern: String) -> [Item] {
+		do {
+			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+			fetchRequest.predicate = NSPredicate(format: "front CONTAINS[c] %@ OR back CONTAINS[c] %@", pattern, pattern)
+			return try context.fetch(fetchRequest) as! [Item]
+		} catch {
+			return []
+		}
+	}
+	
 	func getAllItem() -> [Item] {
 		do {
 			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")

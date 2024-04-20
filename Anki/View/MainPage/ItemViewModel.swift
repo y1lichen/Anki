@@ -39,6 +39,10 @@ class ItemViewModel: ObservableObject {
 		items = CoreDataManager.shared.getAllItem()
 	}
 	
+	func fetchItemsContainPattern(_ pattern: String) {
+		items = CoreDataManager.shared.selectItemByPattern(pattern)
+	}
+	
 	func checkValid() -> Bool {
 		if front.isEmpty || back.isEmpty {
 			return false

@@ -42,7 +42,11 @@ struct ContentView: View {
             }
             .searchable(text: $searchingText)
 			.onChange(of: searchingText, perform: { newValue in
-				items.nsPredicate = newValue.isEmpty ? nil : NSPredicate(format: "front CONTAINS[c] %@ OR back CONTAINS[c] %@", newValue, newValue)
+				if newValue.isEmpty {
+					viewModel.fetchItems()
+				} else {
+					viewModel.fetchItemsContainPattern(newValue)
+				}
 			})
             .navigationTitle(navigationTitle)
             .toolbar {
