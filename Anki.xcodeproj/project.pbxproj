@@ -17,6 +17,9 @@
 		D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F1A27BD54EA00F77379 /* Anki.xcdatamodeld */; };
 		D42A9F2327BD55CF00F77379 /* ErrorAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */; };
 		D44CACAC2BD3AD0D0089F643 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACAB2BD3AD0D0089F643 /* CoreDataManager.swift */; };
+		D44CACAE2BD3E3F00089F643 /* PlayingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACAD2BD3E3EF0089F643 /* PlayingViewModel.swift */; };
+		D44CACB12BD424190089F643 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACB02BD424190089F643 /* OptionButton.swift */; };
+		D44CACB32BD424460089F643 /* AltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACB22BD424460089F643 /* AltView.swift */; };
 		D45BAB2A27C5323B00FFCBAE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45BAB2927C5323B00FFCBAE /* CardView.swift */; };
 		D469BAB827CE52AB00024707 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D469BAB727CE52AB00024707 /* SettingsView.swift */; };
 		D469BABE27CE782400024707 /* ExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D469BABD27CE782400024707 /* ExportDocument.swift */; };
@@ -39,6 +42,9 @@
 		D42A9F1B27BD54EA00F77379 /* Anki.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Anki.xcdatamodel; sourceTree = "<group>"; };
 		D42A9F2227BD55CF00F77379 /* ErrorAlertViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewModifier.swift; sourceTree = "<group>"; };
 		D44CACAB2BD3AD0D0089F643 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D44CACAD2BD3E3EF0089F643 /* PlayingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingViewModel.swift; sourceTree = "<group>"; };
+		D44CACB02BD424190089F643 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
+		D44CACB22BD424460089F643 /* AltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltView.swift; sourceTree = "<group>"; };
 		D45BAB2927C5323B00FFCBAE /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D469BAB727CE52AB00024707 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D469BABD27CE782400024707 /* ExportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDocument.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 		D418988127C8DF6200F07B1A /* QuizView */ = {
 			isa = PBXGroup;
 			children = (
+				D44CACAF2BD424080089F643 /* widget */,
 				D46B7B5E27BF47F40038CEDC /* QuizView.swift */,
 			);
 			path = QuizView;
@@ -143,12 +150,22 @@
 			path = MainPage;
 			sourceTree = "<group>";
 		};
+		D44CACAF2BD424080089F643 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				D44CACB02BD424190089F643 /* OptionButton.swift */,
+				D44CACB22BD424460089F643 /* AltView.swift */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
 		D45E26E527BFD11800140B3A /* PlayingView */ = {
 			isa = PBXGroup;
 			children = (
 				D418988227C8DF7C00F07B1A /* StudyView */,
 				D418988127C8DF6200F07B1A /* QuizView */,
 				D41C846C27BDE63D0058F103 /* PlayingView.swift */,
+				D44CACAD2BD3E3EF0089F643 /* PlayingViewModel.swift */,
 			);
 			path = PlayingView;
 			sourceTree = "<group>";
@@ -243,11 +260,14 @@
 				D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */,
 				D46B7B5D27BF45F10038CEDC /* StudyView.swift in Sources */,
 				D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */,
+				D44CACB12BD424190089F643 /* OptionButton.swift in Sources */,
 				D42A9F1227BD54E900F77379 /* ContentView.swift in Sources */,
+				D44CACB32BD424460089F643 /* AltView.swift in Sources */,
 				D46B7B5F27BF47F40038CEDC /* QuizView.swift in Sources */,
 				D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */,
 				D45BAB2A27C5323B00FFCBAE /* CardView.swift in Sources */,
 				D4235A4127C6832100C93345 /* ItemViewModel.swift in Sources */,
+				D44CACAE2BD3E3F00089F643 /* PlayingViewModel.swift in Sources */,
 				D469BABE27CE782400024707 /* ExportDocument.swift in Sources */,
 				D44CACAC2BD3AD0D0089F643 /* CoreDataManager.swift in Sources */,
 				D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */,

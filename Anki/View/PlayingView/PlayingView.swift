@@ -25,7 +25,7 @@ struct PlayingView: View {
             if isStudyView {
                 StudyView(goBackAndAddItem: goBackAndAddItem)
             } else {
-				QuizView(items:[], goBackAndAddItem: goBackAndAddItem)
+				QuizView(goBackAndAddItem: goBackAndAddItem)
             }
         }
         .background(NavigationConfigurator {
