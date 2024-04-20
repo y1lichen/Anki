@@ -12,9 +12,9 @@ class ItemViewModel: ObservableObject {
 	@Published var items: [Item]
 	let context = PersistenceController.shared.container.viewContext
 	
-	var front: String = ""
-	var back: String = ""
-	var note: String = ""
+	@Published var front: String = ""
+	@Published var back: String = ""
+	@Published var note: String = ""
 	@Published var frequency: Float = 3.0
 	
 	init() {
@@ -44,6 +44,17 @@ class ItemViewModel: ObservableObject {
 			return false
 		}
 		return true
+	}
+	
+	func updateItem(_ item: Item) {
+		let existingItem = CoreDataManager.shared.getItemById(id: item.objectID)
+		if let existingItem = existingItem {
+			existingItem.front = front
+			existingItem.back = back
+			existingItem.note = note
+			existingItem.frequency = Int64(frequency)
+			CoreDataManager.shared.save()
+		}
 	}
 	
 	func saveNewItem() {

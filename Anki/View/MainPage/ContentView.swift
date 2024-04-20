@@ -32,7 +32,7 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-						EditItemView(item: item, saveUpdatedItem: saveUpdatedItem)
+						EditItemView(item: item)
                     } label: {
                         VStack {
                             Text(item.front!)
@@ -99,14 +99,6 @@ struct ContentView: View {
 			}
 		}())
 	}
-
-    private func saveUpdatedItem() {
-		do {
-			try viewContext.save()
-		} catch {
-			self.errorHandling.handleError(error: error)
-		}
-    }
 
     private func openAddItemView() {
         showAddItemView = true

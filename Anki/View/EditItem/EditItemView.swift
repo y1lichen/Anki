@@ -11,55 +11,48 @@ struct EditItemView: View {
     private var item: Item
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+	@StateObject var viewModel = ItemViewModel()
 	
-	
-    init(item: Item, saveUpdatedItem: @escaping () -> Void) {
+    init(item: Item) {
         self.item = item
-        self.saveUpdatedItem = saveUpdatedItem
-        _newFront = State(initialValue: item.front!)
-        _newBack = State(initialValue: item.back!)
-		_newNote = State(initialValue: item.note!)
-        _newFrequency = State(initialValue: Float(item.frequency))
     }
-
-    private var saveUpdatedItem: () -> Void
 
     var body: some View {
         Form {
             Section(header: Text("Card")) {
-                TextField("Front", text: $newFront)
-                TextField("Back", text: $newBack)
+				TextField("Front", text: $viewModel.front)
+				TextField("Back", text: $viewModel.back)
             }
 
 			Section(header: Text("Note")) {
-				TextEditor(text: $newNote)
+				TextEditor(text: $viewModel.note)
 					.frame(height: 100)
 			}
 			
-            Section(header: Text("Frequency: \(Int(newFrequency))")) {
-                Slider(value: $newFrequency, in: 0 ... 5, step: 1,
+			Section(header: Text("Frequency: \(Int(viewModel.frequency))")) {
+				Slider(value: $viewModel.frequency, in: 0 ... 5, step: 1,
                        label: { Text("Frequency of notification") },
                        minimumValueLabel: { Text("0") },
                        maximumValueLabel: { Text("5") }
                 )
             }
         }
-        .navigationTitle(newFront)
+		.navigationTitle(viewModel.front)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(presentationMode: presentationMode), trailing: saveButton)
-    }
-	
-	func updateItem() {
-		item.front = newFront
-		item.back = newBack
-		item.note = newNote
-		item.frequency = Int64(newFrequency)
-		saveUpdatedItem()
+		.onAppear {
+			// 不能在init()裡做
+			// 否則報錯 Accessing StateObject's object without being installed on a View.
+			viewModel.front = item.front ?? ""
+			viewModel.back = item.back ?? ""
+			viewModel.note = item.note ?? ""
+			viewModel.frequency = Float(item.frequency)
+		}
 	}
 
     var saveButton: some View {
         Button(action: {
-			updateItem()
+			viewModel.updateItem(item)
 			self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Save")
