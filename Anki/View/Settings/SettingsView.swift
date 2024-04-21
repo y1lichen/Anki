@@ -9,47 +9,18 @@ import SwiftUI
 
 struct SettingsView: View {
 	
-	@State private var isExport: Bool = false
-	@State private var showAlert: Bool = false
-	
-	@AppStorage("sortMethod") private var sortMethod = 0
-    @AppStorage("schemeMode") private var schemeMode = 0
-	
-	@StateObject var viewModel = ItemViewModel()
-
-	
-	let dateFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateFormat = "y_MM_dd_HH:mm:ss"
-		return formatter
-	}()
-	
-	private func createDocument() -> ExportDocument {
-		var document: ExportDocument
-		var data: String = "Front,Back,Note,timetamp\n"
-		for item in viewModel.items {
-			data += "\(item.front!),\(item.back!),\(item.note!),\(item.timestamp!.description)\n"
-		}
-		document = ExportDocument(documentData: data)
-		return document
-	}
-	
-	private func getExportDocumentFileName() -> String {
-		var result: String = "anki"
-		result += dateFormatter.string(from: Date())
-		return result
-	}
+	@StateObject var settingViewModel = SettingViewModel.shared
 	
     var body: some View {
         Form {
-            Picker(selection: $schemeMode) {
+			Picker(selection: $settingViewModel.settings.schemeMode) {
                 Text("Auto").tag(0)
                 Text("Light").tag(1)
                 Text("Dark").tag(2)
             } label: {
                 Text("Appearance")
             }
-			Picker(selection: $sortMethod) {
+			Picker(selection: $settingViewModel.settings.sortMethod) {
 				Text("Front").tag(0)
 				Text("Back").tag(1)
 				Text("Added time").tag(2)
@@ -58,23 +29,25 @@ struct SettingsView: View {
 			}
 
             Button(action: {
-				isExport = true
+				settingViewModel.setIsExport(true)
 			}) {
                 Text("Export CSV File")
             }
 		}
-		.alert("Error!", isPresented: $showAlert, actions: {
-			Button("Ok", role: .none, action: {})
+		.alert("Error!", isPresented: $settingViewModel.showAlert, actions: {
+			Button("Ok", role: .none, action: {
+				settingViewModel.toggleShowAlert()
+			})
 		}, message:{
 			Text("Unable to export CSV file.")
 		})
-		.fileExporter(isPresented: $isExport,
-					  document: createDocument(),
+		.fileExporter(isPresented: $settingViewModel.isExport,
+					  document: settingViewModel.createDocument(),
 					  contentType: .commaSeparatedText,
-					  defaultFilename: getExportDocumentFileName())
+					  defaultFilename: settingViewModel.getExportDocumentFileName())
 		{ result in
 			if case .failure = result {
-				showAlert = true
+				settingViewModel.toggleShowAlert()
 			}
 		}
     }

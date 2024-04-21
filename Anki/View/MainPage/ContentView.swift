@@ -10,17 +10,10 @@ import SwiftUI
 
 struct ContentView: View {
 	
-	@AppStorage("schemeMode") private var schemeMode = 0
-	
     @EnvironmentObject var errorHandling: ErrorHandling
 
 	@StateObject var viewModel = ItemViewModel()
-
-    @State private var searchingText = ""
-    @State private var showAddItemView = false
-	
-    @State private var navigationTitle = "Anki"
-	
+	@StateObject var settingViewModel = SettingViewModel.shared
     var body: some View {
         NavigationView {
             List {
@@ -38,17 +31,20 @@ struct ContentView: View {
                         }
                     }
                 }
-                .onDelete(perform: deleteItems)
+				.onDelete(perform: viewModel.deleteItems)
             }
-            .searchable(text: $searchingText)
-			.onChange(of: searchingText, perform: { newValue in
+			.searchable(text: $viewModel.searchingText)
+			.onChange(of: viewModel.searchingText, perform: { newValue in
 				if newValue.isEmpty {
 					viewModel.fetchItems()
 				} else {
 					viewModel.fetchItemsContainPattern(newValue)
 				}
 			})
-            .navigationTitle(navigationTitle)
+			.onChange(of: settingViewModel.settings.sortMethod, perform: { _ in
+				viewModel.sortItems()
+			})
+			.navigationTitle(viewModel.navigationTitle)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
 					NavigationLink {
@@ -63,51 +59,30 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: openAddItemView) {
+					Button(action: viewModel.openAddItemView) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
 				ToolbarItem(placement: .bottomBar) {
 					NavigationLink(destination:
-									PlayingView(openAddItemView: openAddItemView)
+									PlayingView(openAddItemView: viewModel.openAddItemView)
 									.withErrorAlert()) {
 						Image(systemName: "play.fill")
 					}
 				}
 			}
 			.onAppear(perform: {
-                navigationTitle = "Anki"
+				viewModel.navigationTitle = "Anki"
             })
             .onDisappear(perform: {
-                navigationTitle = "Menu"
+				viewModel.navigationTitle = "Menu"
             })
         }
-        .sheet(isPresented: $showAddItemView) {
+		.sheet(isPresented: $viewModel.showAddItemView) {
             AddItemView().withErrorAlert()
         }
 		.preferredColorScheme({
-			if schemeMode == 0 {
-				return .none
-			} else if schemeMode == 1 {
-				return .light
-			} else if schemeMode == 2 {
-				return .dark
-			} else {
-				return .none
-			}
+			viewModel.getSchemeMode()
 		}())
 	}
-
-    private func openAddItemView() {
-        showAddItemView = true
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-			offsets.forEach { idx in
-				let item = viewModel.items[idx]
-				viewModel.delete(item)
-			}
-        }
-    }
 }
