@@ -21,10 +21,10 @@ struct ContentView: View {
                         EditItemView(item: item)
                     } label: {
 						VStack(alignment: .leading) {
-                            Text(item.front!)
+                            Text(item.front ?? "")
                                 .font(.title2)
                                 .fontWeight(.bold)
-                            Text("\(item.back!)")
+                            Text(item.back ?? "")
                                 .offset(x: 10)
                                 .font(.body)
 						}
