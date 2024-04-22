@@ -11,6 +11,8 @@ import SwiftUI
 
 class ItemViewModel: ObservableObject {
     @Published var items: [Item]
+	
+	public static var shared = ItemViewModel()
 
 	@AppStorage("schemeMode") var schemeMode = 0
 
@@ -31,6 +33,8 @@ class ItemViewModel: ObservableObject {
     @Published var back: String = ""
     @Published var note: String = ""
     @Published var frequency: Float = 3.0
+	
+	@Published var showAlert: Bool = false
 
     init() {
         items = []
@@ -110,6 +114,7 @@ class ItemViewModel: ObservableObject {
         newItem.frequency = Int64(frequency)
         newItem.timestamp = Date()
         CoreDataManager.shared.save()
+		fetchItems()
     }
 
     func delete(_ item: Item) {
@@ -118,4 +123,12 @@ class ItemViewModel: ObservableObject {
             CoreDataManager.shared.deleteItem(existingItem)
         }
     }
+	
+	func addItem() {
+		if checkValid() {
+			saveNewItem()
+		} else {
+			showAlert = true
+		}
+	}
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var errorHandling: ErrorHandling
 
-    @StateObject var viewModel = ItemViewModel()
+	@StateObject var viewModel = ItemViewModel.shared
     @StateObject var settingViewModel = SettingViewModel.shared
     var body: some View {
         NavigationView {

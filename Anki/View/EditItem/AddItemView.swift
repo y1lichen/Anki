@@ -9,11 +9,10 @@ import SwiftUI
 
 struct AddItemView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel = ItemViewModel()
+	@StateObject var viewModel = ItemViewModel.shared
 
     @EnvironmentObject var errorHandling: ErrorHandling
-    @State private var showAlert: Bool = false
-
+    
     var body: some View {
         Form {
             Section {
@@ -46,23 +45,15 @@ struct AddItemView: View {
                 )
             }
         }
-        .alert("Unable to create new item!", isPresented: $showAlert, actions: {
+		.alert("Unable to create new item!", isPresented: $viewModel.showAlert, actions: {
             Button("Ok") {}
         }, message: {
             Text("The front and the back of the item is required.")
         })
 		Spacer()
 		Button("Add") {
-			addItem()
+			viewModel.addItem()
 			presentationMode.wrappedValue.dismiss()
 		}
-    }
-
-    private func addItem() {
-		if viewModel.checkValid() {
-			viewModel.saveNewItem()
-        } else {
-            showAlert = true
-        }
     }
 }
