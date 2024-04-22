@@ -9,8 +9,8 @@
 - AI translation. **powered by Gemini**
 
 # Screenshots
-![screenshot](light_main.png)
-![screenshot](flashcard.png)
-![screenshot](translate.png)
-![screenshot](translate2.png)
-![screenshot](setting.png)
+![screenshot](image/light_main.png)
+![screenshot](image/flashcard.png)
+![screenshot](image/translate.png)
+![screenshot](image/translate2.png)
+![screenshot](image/setting.png)
