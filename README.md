@@ -13,4 +13,5 @@
 ![screenshot](image/flashcard.png)
 ![screenshot](image/translate.png)
 ![screenshot](image/translate2.png)
+![screenshot](image/translate3.png)
 ![screenshot](image/setting.png)

@@ -33,6 +33,7 @@ class TranslateViewModel: ObservableObject {
         TranslationService.getTraslatedResult(prompt: getPrompt()) { result in
             switch result {
             case let .success(data):
+				// 要在main thread裡執行
                 DispatchQueue.main.async {
                     self.result = data.candidates.first?.content.parts.first?.text ?? ""
                 }
