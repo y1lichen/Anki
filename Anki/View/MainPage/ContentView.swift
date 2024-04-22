@@ -20,14 +20,14 @@ struct ContentView: View {
                     NavigationLink {
                         EditItemView(item: item)
                     } label: {
-                        VStack {
+						VStack(alignment: .leading) {
                             Text(item.front!)
                                 .font(.title2)
                                 .fontWeight(.bold)
                             Text("\(item.back!)")
                                 .offset(x: 10)
                                 .font(.body)
-                        }
+						}
                     }
                 }
                 .onDelete(perform: viewModel.deleteItems)
