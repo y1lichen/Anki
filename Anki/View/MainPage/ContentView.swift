@@ -40,6 +40,7 @@ struct ContentView: View {
                     viewModel.fetchItemsContainPattern(newValue)
                 }
             })
+			// 在這監聽sortMethod改變，重新排序ViewModel中的items
             .onChange(of: settingViewModel.settings.sortMethod, perform: { _ in
                 viewModel.sortItems()
             })

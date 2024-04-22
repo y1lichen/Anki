@@ -11,8 +11,7 @@ import SwiftUI
 
 class ItemViewModel: ObservableObject {
     @Published var items: [Item]
-    let context = PersistenceController.shared.container.viewContext
-	
+
 	@AppStorage("schemeMode") var schemeMode = 0
 
     @Published var navigationTitle = "Anki"
