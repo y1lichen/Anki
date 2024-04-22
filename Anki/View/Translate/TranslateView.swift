@@ -13,14 +13,15 @@ struct TranslateView: View {
         VStack {
             Form {
                 Section {
-					TextEditorWithPlaceholder(text: $viewModel.text, placeholder: "Input...", showWordCount: true)
+					TextEditorWithPlaceholder(viewModel: viewModel, text: $viewModel.text, placeholder: "Input...")
 						.autocorrectionDisabled()
                         .frame(height: 180)
                         .padding(.top, 8)
                         .padding(.bottom, 8)
                 }
                 Section {
-					TextEditorWithPlaceholder(text: $viewModel.result, placeholder: "", isEditable: false)
+					TextEditor(text: $viewModel.result)
+						.disabled(true)
                         .frame(height: 180)
                         .padding(.top, 8)
                         .padding(.bottom, 8)

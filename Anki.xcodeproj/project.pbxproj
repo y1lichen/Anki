@@ -26,6 +26,9 @@
 		D44CACBF2BD58BF20089F643 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACBE2BD58BF20089F643 /* ToolBar.swift */; };
 		D44CACC12BD590A20089F643 /* TranslateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACC02BD590A20089F643 /* TranslateViewModel.swift */; };
 		D44CACC62BD609C30089F643 /* TextEditorWithPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACC52BD609C30089F643 /* TextEditorWithPlaceholder.swift */; };
+		D44CACC92BD621FF0089F643 /* ResponseDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACC82BD621FF0089F643 /* ResponseDataType.swift */; };
+		D44CACCD2BD660220089F643 /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACCC2BD660220089F643 /* TranslationService.swift */; };
+		D44CACD12BD663C80089F643 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACD02BD663C80089F643 /* CustomError.swift */; };
 		D45BAB2A27C5323B00FFCBAE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45BAB2927C5323B00FFCBAE /* CardView.swift */; };
 		D469BAB827CE52AB00024707 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D469BAB727CE52AB00024707 /* SettingsView.swift */; };
 		D469BABE27CE782400024707 /* ExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D469BABD27CE782400024707 /* ExportDocument.swift */; };
@@ -57,6 +60,9 @@
 		D44CACBE2BD58BF20089F643 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		D44CACC02BD590A20089F643 /* TranslateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewModel.swift; sourceTree = "<group>"; };
 		D44CACC52BD609C30089F643 /* TextEditorWithPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorWithPlaceholder.swift; sourceTree = "<group>"; };
+		D44CACC82BD621FF0089F643 /* ResponseDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataType.swift; sourceTree = "<group>"; };
+		D44CACCC2BD660220089F643 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		D44CACD02BD663C80089F643 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		D45BAB2927C5323B00FFCBAE /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D469BAB727CE52AB00024707 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D469BABD27CE782400024707 /* ExportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDocument.swift; sourceTree = "<group>"; };
@@ -193,9 +199,11 @@
 		D44CACBA2BD589DC0089F643 /* Translate */ = {
 			isa = PBXGroup;
 			children = (
+				D44CACC72BD621E80089F643 /* model */,
 				D44CACC22BD5910F0089F643 /* widget */,
 				D44CACBB2BD589F30089F643 /* TranslateView.swift */,
 				D44CACC02BD590A20089F643 /* TranslateViewModel.swift */,
+				D44CACCC2BD660220089F643 /* TranslationService.swift */,
 			);
 			path = Translate;
 			sourceTree = "<group>";
@@ -214,6 +222,15 @@
 				D44CACC52BD609C30089F643 /* TextEditorWithPlaceholder.swift */,
 			);
 			name = widget;
+			sourceTree = "<group>";
+		};
+		D44CACC72BD621E80089F643 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				D44CACC82BD621FF0089F643 /* ResponseDataType.swift */,
+				D44CACD02BD663C80089F643 /* CustomError.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		D45E26E527BFD11800140B3A /* PlayingView */ = {
@@ -311,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D44CACB72BD4D9550089F643 /* SettingModel.swift in Sources */,
+				D44CACCD2BD660220089F643 /* TranslationService.swift in Sources */,
 				D44CACB92BD4DE340089F643 /* SettingViewModel.swift in Sources */,
 				D44CACC62BD609C30089F643 /* TextEditorWithPlaceholder.swift in Sources */,
 				D469BAB827CE52AB00024707 /* SettingsView.swift in Sources */,
@@ -320,6 +338,7 @@
 				D46B7B6127BF54570038CEDC /* BackButton.swift in Sources */,
 				D42A9F1C27BD54EA00F77379 /* Anki.xcdatamodeld in Sources */,
 				D41C846D27BDE63D0058F103 /* PlayingView.swift in Sources */,
+				D44CACC92BD621FF0089F643 /* ResponseDataType.swift in Sources */,
 				D46B7B5D27BF45F10038CEDC /* StudyView.swift in Sources */,
 				D42A9F1927BD54EA00F77379 /* Persistence.swift in Sources */,
 				D44CACB12BD424190089F643 /* OptionButton.swift in Sources */,
@@ -329,6 +348,7 @@
 				D42A9F1027BD54E900F77379 /* AnkiApp.swift in Sources */,
 				D45BAB2A27C5323B00FFCBAE /* CardView.swift in Sources */,
 				D44CACBC2BD589F30089F643 /* TranslateView.swift in Sources */,
+				D44CACD12BD663C80089F643 /* CustomError.swift in Sources */,
 				D4235A4127C6832100C93345 /* ItemViewModel.swift in Sources */,
 				D44CACAE2BD3E3F00089F643 /* PlayingViewModel.swift in Sources */,
 				D469BABE27CE782400024707 /* ExportDocument.swift in Sources */,
