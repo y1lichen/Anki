@@ -37,7 +37,11 @@ struct TextEditorWithPlaceholder: View {
 					TextEditor(text: $viewModel.text)
                         .onChange(of: viewModel.text) { _ in
                             if viewModel.text.last?.isNewline == .some(true) {
+								// 移除最後一個\n
 								viewModel.text.removeLast()
+								if viewModel.text.isEmpty {
+									return
+								}
                                 isFocused = false
 								viewModel.fetchData()
                             }

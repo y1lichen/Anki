@@ -22,10 +22,15 @@ class TranslateViewModel: ObservableObject {
     var state: ViewState = .idle
 
     private var cancellable: AnyCancellable?
+	
+	private func getPrompt() -> String {
+		let translateTo = UserDefaults.standard.string(forKey: "translateTo")
+		return "請用\(translateTo ?? "英文")翻譯並解釋「\(text)」，並說明使用情境。"
+	}
 
     func fetchData() {
         state = .loading
-        TranslationService.getTraslatedResult(text: text) { result in
+        TranslationService.getTraslatedResult(prompt: getPrompt()) { result in
             switch result {
             case let .success(data):
                 DispatchQueue.main.async {

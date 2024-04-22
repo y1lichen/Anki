@@ -13,26 +13,40 @@ struct SettingsView: View {
 	
     var body: some View {
         Form {
-			Picker(selection: $settingViewModel.settings.schemeMode) {
-                Text("Auto").tag(0)
-                Text("Light").tag(1)
-                Text("Dark").tag(2)
-            } label: {
-                Text("Appearance")
-            }
-			Picker(selection: $settingViewModel.settings.sortMethod) {
-				Text("Front").tag(0)
-				Text("Back").tag(1)
-				Text("Added time").tag(2)
-			} label: {
-				Text("Sort by")
+			Section("Flashcards") {
+				Picker(selection: $settingViewModel.settings.schemeMode) {
+					Text("Auto").tag(0)
+					Text("Light").tag(1)
+					Text("Dark").tag(2)
+				} label: {
+					Text("Appearance")
+				}
+				Picker(selection: $settingViewModel.settings.sortMethod) {
+					Text("Front").tag(0)
+					Text("Back").tag(1)
+					Text("Added time").tag(2)
+				} label: {
+					Text("Sort by")
+				}
+				
+				Button(action: {
+					settingViewModel.setIsExport(true)
+				}) {
+					Text("Export CSV File")
+				}
 			}
-
-            Button(action: {
-				settingViewModel.setIsExport(true)
-			}) {
-                Text("Export CSV File")
-            }
+			
+			Section("Translation") {
+				Picker(selection: $settingViewModel.settings.translateTo) {
+					Text("English").tag(TranslateTo.english.rawValue)
+					Text("繁體中文").tag(TranslateTo.tradChinese.rawValue)
+					Text("簡體中文").tag(TranslateTo.simChinese.rawValue)
+					Text("日本語").tag(TranslateTo.japanese.rawValue)
+				} label: {
+					Text("Translate to")
+				}
+				TextField("Gemini API key", text: $settingViewModel.settings.geminiApiKey)
+			}
 		}
 		.alert("Error!", isPresented: $settingViewModel.showAlert, actions: {
 			Button("Ok", role: .none, action: {
