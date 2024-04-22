@@ -24,6 +24,8 @@
 		D44CACB92BD4DE340089F643 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACB82BD4DE340089F643 /* SettingViewModel.swift */; };
 		D44CACBC2BD589F30089F643 /* TranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACBB2BD589F30089F643 /* TranslateView.swift */; };
 		D44CACBF2BD58BF20089F643 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACBE2BD58BF20089F643 /* ToolBar.swift */; };
+		D44CACC12BD590A20089F643 /* TranslateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACC02BD590A20089F643 /* TranslateViewModel.swift */; };
+		D44CACC62BD609C30089F643 /* TextEditorWithPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CACC52BD609C30089F643 /* TextEditorWithPlaceholder.swift */; };
 		D45BAB2A27C5323B00FFCBAE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45BAB2927C5323B00FFCBAE /* CardView.swift */; };
 		D469BAB827CE52AB00024707 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D469BAB727CE52AB00024707 /* SettingsView.swift */; };
 		D469BABE27CE782400024707 /* ExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D469BABD27CE782400024707 /* ExportDocument.swift */; };
@@ -53,6 +55,8 @@
 		D44CACB82BD4DE340089F643 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		D44CACBB2BD589F30089F643 /* TranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateView.swift; sourceTree = "<group>"; };
 		D44CACBE2BD58BF20089F643 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
+		D44CACC02BD590A20089F643 /* TranslateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewModel.swift; sourceTree = "<group>"; };
+		D44CACC52BD609C30089F643 /* TextEditorWithPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorWithPlaceholder.swift; sourceTree = "<group>"; };
 		D45BAB2927C5323B00FFCBAE /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D469BAB727CE52AB00024707 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D469BABD27CE782400024707 /* ExportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDocument.swift; sourceTree = "<group>"; };
@@ -189,7 +193,9 @@
 		D44CACBA2BD589DC0089F643 /* Translate */ = {
 			isa = PBXGroup;
 			children = (
+				D44CACC22BD5910F0089F643 /* widget */,
 				D44CACBB2BD589F30089F643 /* TranslateView.swift */,
+				D44CACC02BD590A20089F643 /* TranslateViewModel.swift */,
 			);
 			path = Translate;
 			sourceTree = "<group>";
@@ -200,6 +206,14 @@
 				D44CACBE2BD58BF20089F643 /* ToolBar.swift */,
 			);
 			name = "New Group";
+			sourceTree = "<group>";
+		};
+		D44CACC22BD5910F0089F643 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				D44CACC52BD609C30089F643 /* TextEditorWithPlaceholder.swift */,
+			);
+			name = widget;
 			sourceTree = "<group>";
 		};
 		D45E26E527BFD11800140B3A /* PlayingView */ = {
@@ -298,6 +312,7 @@
 			files = (
 				D44CACB72BD4D9550089F643 /* SettingModel.swift in Sources */,
 				D44CACB92BD4DE340089F643 /* SettingViewModel.swift in Sources */,
+				D44CACC62BD609C30089F643 /* TextEditorWithPlaceholder.swift in Sources */,
 				D469BAB827CE52AB00024707 /* SettingsView.swift in Sources */,
 				D42A9F2327BD55CF00F77379 /* ErrorAlertViewModifier.swift in Sources */,
 				D4E080A127BD592D00A27F34 /* AddItemView.swift in Sources */,
@@ -317,6 +332,7 @@
 				D4235A4127C6832100C93345 /* ItemViewModel.swift in Sources */,
 				D44CACAE2BD3E3F00089F643 /* PlayingViewModel.swift in Sources */,
 				D469BABE27CE782400024707 /* ExportDocument.swift in Sources */,
+				D44CACC12BD590A20089F643 /* TranslateViewModel.swift in Sources */,
 				D44CACAC2BD3AD0D0089F643 /* CoreDataManager.swift in Sources */,
 				D4B4A07E27BD62C0005E4E97 /* EditItemView.swift in Sources */,
 			);

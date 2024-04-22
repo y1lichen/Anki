@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct TranslateView: View {
+	@StateObject var viewModel = TranslateViewModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Form {
+                Section {
+					TextEditorWithPlaceholder(text: $viewModel.text, placeholder: "Input...", showWordCount: true)
+						.autocorrectionDisabled()
+                        .frame(height: 180)
+                        .padding(.top, 8)
+                        .padding(.bottom, 8)
+                }
+                Section {
+					TextEditorWithPlaceholder(text: $viewModel.result, placeholder: "", isEditable: false)
+                        .frame(height: 180)
+                        .padding(.top, 8)
+                        .padding(.bottom, 8)
+                }
+            }
+        }
     }
-}
-
-#Preview {
-    TranslateView()
 }

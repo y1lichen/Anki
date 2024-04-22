@@ -12,5 +12,6 @@ struct SettingModel {
 	
 	@AppStorage("sortMethod") var sortMethod = 0
 	@AppStorage("schemeMode") var schemeMode = 0
-	@AppStorage("geminiApiKey") var geminiApiKey = "AIzaSyCN_Ipm0E2nVertIp9-qpgRv8RTEBhvpU4"
+	@AppStorage("translateTo") var translateTo = 0
+	@AppStorage("geminiApiKey") var geminiApiKey = ""
 }

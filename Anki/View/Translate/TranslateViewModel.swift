@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+class TranslateViewModel: ObservableObject {
+	@Published var text = ""
+	@Published var result = ""
+}
