@@ -19,15 +19,22 @@ struct TranslateView: View {
                         .padding(.top, 8)
                         .padding(.bottom, 8)
                 }
+
                 Section {
-                    ScrollView {
-                        Text(viewModel.result)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 8)
-                            .padding(.bottom, 8)
-							.lineLimit(nil)
+                    if viewModel.state == .loading {
+                        ProgressView()
+							.progressViewStyle(LinearProgressViewStyle())
+							.frame(height: 180)
+                    } else {
+                        ScrollView {
+                            Text(viewModel.result)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.top, 8)
+                                .padding(.bottom, 8)
+                                .lineLimit(nil)
+                        }
+                        .frame(height: 180)
                     }
-					.frame(height: 180)
                 }
             }
         }

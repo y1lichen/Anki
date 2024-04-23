@@ -52,7 +52,7 @@ class TranslationService {
         }.resume()
     }
 
-    private static func getLanguageOfInput(_ input: String) -> NLLanguage? {
+    static func getLanguageOfInput(_ input: String) -> NLLanguage? {
         let languageRecognizer = NLLanguageRecognizer()
         languageRecognizer.processString(input)
         return languageRecognizer.dominantLanguage

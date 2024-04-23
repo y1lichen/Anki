@@ -8,18 +8,12 @@
 import Combine
 import Foundation
 
-enum ViewState {
-    case idle
-    case loading
-    case success
-    case error(Error)
-}
 
 class TranslateViewModel: ObservableObject {
     @Published var text = ""
     @Published var result = ""
 		
-    var state: ViewState = .idle
+    @Published var state: ViewState = .idle
 
     private var cancellable: AnyCancellable?
 	
@@ -36,12 +30,13 @@ class TranslateViewModel: ObservableObject {
 				// 要在main thread裡執行
                 DispatchQueue.main.async {
                     self.result = data.candidates.first?.content.parts.first?.text ?? ""
+					self.state = .success
                 }
             case let .failure(error):
                 DispatchQueue.main.async {
                     self.result = ""
+					self.state = .error(error)
                 }
-                self.state = .error(error)
             }
         }
     }
