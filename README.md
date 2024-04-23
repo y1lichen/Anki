@@ -12,6 +12,7 @@
 # Screenshots
 ![screenshot](image/light_main.png)
 ![screenshot](image/flashcard.png)
+![screenshot](image/quiz.png)
 ![screenshot](image/translate_with_tts.png)
 ![screenshot](image/translate.png)
 ![screenshot](image/translate2.png)
