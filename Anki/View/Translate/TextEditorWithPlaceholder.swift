@@ -51,6 +51,11 @@ struct TextEditorWithPlaceholder: View {
                         .padding(.top, 10)
                         .frame(minHeight: 150, maxHeight: 300)
                         .opacity(viewModel.text.isEmpty ? 0.85 : 1)
+					Spacer()
+					Button(action: viewModel.startTTSText) {
+						Image(systemName: "play.circle")
+							.imageScale(.large)
+					}
                     Spacer()
                 }
             }

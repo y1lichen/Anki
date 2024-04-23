@@ -18,7 +18,7 @@ enum ViewState {
 class TranslateViewModel: ObservableObject {
     @Published var text = ""
     @Published var result = ""
-
+		
     var state: ViewState = .idle
 
     private var cancellable: AnyCancellable?
@@ -45,4 +45,8 @@ class TranslateViewModel: ObservableObject {
             }
         }
     }
+	
+	func startTTSText() {
+		TranslationService.speakText(text)
+	}
 }

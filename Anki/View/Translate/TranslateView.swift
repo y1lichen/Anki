@@ -15,7 +15,7 @@ struct TranslateView: View {
                 Section {
                     TextEditorWithPlaceholder(viewModel: viewModel, text: $viewModel.text, placeholder: "Input...")
                         .autocorrectionDisabled()
-                        .frame(height: 150)
+                        .frame(height: 180)
                         .padding(.top, 8)
                         .padding(.bottom, 8)
                 }
