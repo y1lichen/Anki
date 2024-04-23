@@ -12,7 +12,7 @@ import SwiftUI
 class ItemViewModel: ObservableObject {
     @Published var items: [Item]
 	
-	public static var shared = ItemViewModel()
+//	public static var shared = ItemViewModel()
 
 	@AppStorage("schemeMode") var schemeMode = 0
 

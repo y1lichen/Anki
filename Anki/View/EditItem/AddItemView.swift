@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddItemView: View {
     @Environment(\.presentationMode) var presentationMode
-	@StateObject var viewModel = ItemViewModel.shared
+	@ObservedObject var viewModel: ItemViewModel
 
     @EnvironmentObject var errorHandling: ErrorHandling
     

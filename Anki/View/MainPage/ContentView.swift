@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var errorHandling: ErrorHandling
 
-	@StateObject var viewModel = ItemViewModel.shared
+	@StateObject var viewModel = ItemViewModel()
     @StateObject var settingViewModel = SettingViewModel.shared
     var body: some View {
         NavigationView {
@@ -56,7 +56,7 @@ struct ContentView: View {
             })
         }
         .sheet(isPresented: $viewModel.showAddItemView) {
-            AddItemView().withErrorAlert()
+			AddItemView(viewModel: viewModel).withErrorAlert()
         }
         .preferredColorScheme({
             viewModel.getSchemeMode()
