@@ -58,12 +58,16 @@ class ItemViewModel: ObservableObject {
     }
 
     func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.forEach { idx in
-                let item = items[idx]
-                delete(item)
-            }
-        }
+		var item: Item? = nil
+		offsets.forEach { idx in
+			item = items[idx]
+		}
+		if item != nil {
+			withAnimation {
+				items.remove(atOffsets: offsets)
+			}
+			delete(item!)
+		}
     }
 
     // 0 => front, 1 => back, 2 => time

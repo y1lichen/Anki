@@ -29,8 +29,7 @@ struct ContentView: View {
                                 .font(.body)
 						}
                     }
-                }
-                .onDelete(perform: viewModel.deleteItems)
+				}.onDelete(perform: viewModel.deleteItems)
             }
             .searchable(text: $viewModel.searchingText)
             .onChange(of: viewModel.searchingText, perform: { newValue in

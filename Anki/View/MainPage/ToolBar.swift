@@ -14,7 +14,7 @@ struct ToolBar: ToolbarContent {
 		self.viewModel = viewModel
 	}
 	
-    var body: some ToolbarContent{
+    var body: some ToolbarContent {
 		ToolbarItem(placement: .navigationBarLeading) {
 			NavigationLink {
 				SettingsView()
