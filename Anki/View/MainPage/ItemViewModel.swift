@@ -124,9 +124,17 @@ class ItemViewModel: ObservableObject {
         }
     }
 	
+	func clearItem() {
+		front = ""
+		back = ""
+		note = ""
+		frequency = 3.0
+	}
+	
 	func addItem() {
 		if checkValid() {
 			saveNewItem()
+			clearItem()
 		} else {
 			showAlert = true
 		}
